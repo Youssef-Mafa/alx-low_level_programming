@@ -1,10 +1,15 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<stdlib.h>
+
 /**
- * main program function that prints a line
- * return: 0
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	puts("\"Programming is like building a multilingual puzzle");
+	char tring[] = "\"Programming is like building a multilingual puzzle";
+
+	puts(tring);
 	return (0);
 }
