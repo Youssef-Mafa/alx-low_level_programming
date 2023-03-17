@@ -1,26 +1,26 @@
+#include <stdlib.h>
+#include <time.h>
+/* more headers goes there */
 #include <stdio.h>
-/* main - Entry point */
-
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+/* betty style doc for function main goes there */
 int main(void)
 {
-	char c;
+	/* your code goes there */
+	int ch = 0;
 
-	int d;
+	char CH = 'a';
 
-	c = 'a';
-	
-	d = 0;
-	
-	while
-		(d < 10) {
-			putchar(d + '0');
-			d++;
-		}
-	while
-		(c <= 'f') {
-			putchar(c);
-			c++;
-		}
+	for (ch = 0; ch <= 9; ch++)
+	{
+		putchar(ch + '0');
+	}
+	for (CH = 'a'; CH <= 'f'; CH++)
+		putchar(CH);
 	putchar('\n');
 	return (0);
 }
