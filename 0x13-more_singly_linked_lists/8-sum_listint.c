@@ -8,12 +8,10 @@
  */
 int sum_listint(listint_t *head)
 {
-    if (head == NULL) {
-        return 0;
+    int sum = 0;
+    for (listint_t *temp = head; temp != NULL; temp = temp->next)
+    {
+        sum += temp->n;
     }
-
-    int sum = head->n;
-    sum += sum_listint(head->next);
-
     return sum;
 }
