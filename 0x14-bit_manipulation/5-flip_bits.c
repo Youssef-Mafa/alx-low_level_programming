@@ -6,19 +6,16 @@
  * @n: number 1
  * @m: number 2
  * Return: number of bits needed to flip
- */
+  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	int i, count = 0;
-	unsigned long int c;
-	unsigned long int x = n ^ m;
+	unsigned int x = 0;
+	unsigned long int y = n ^ m;
 
-	for (i = sizeof(unsigned long int) * 8; i >= 0; i--)
+	while (y)
 	{
-		c = x >> i;
-		if (c & 1)
-			count++;
+		x += y & 1;
+		y >>= 1;
 	}
-
-	return (count);
+	return (x);
 }
