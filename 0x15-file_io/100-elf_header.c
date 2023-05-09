@@ -18,65 +18,39 @@ void print_type(unsigned int e_type, unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
-// Main function
-int main(int argc, char *argv[])
-{
-    // Open the file specified as the first argument
-    int fd = open(argv[1], O_RDONLY);
-
-    // If open fails, exit with an error message
-    if (fd == -1) {
-        perror("Error: Cannot open file");
-        exit(98);
-    }
-
-    // Read the ELF header
-    Elf64_Ehdr elf_header;
-    ssize_t bytes_read = read(fd, &elf_header, sizeof(Elf64_Ehdr));
-
-    // If read fails, exit with an error message
-    if (bytes_read != sizeof(Elf64_Ehdr)) {
-        perror("Error: Cannot read file");
-        close(fd);
-        exit(98);
-    }
-
-    // Check if the file is an ELF file
-    check_elf(elf_header.e_ident);
-
-    // Print the ELF header information
-    print_magic(elf_header.e_ident);
-    print_class(elf_header.e_ident);
-    print_data(elf_header.e_ident);
-    print_version(elf_header.e_ident);
-    print_abi(elf_header.e_ident);
-    print_type(elf_header.e_type, elf_header.e_ident);
-    print_entry(elf_header.e_entry, elf_header.e_ident);
-    print_osabi(elf_header.e_ident);
-
-    // Close the file descriptor
-    close_elf(fd);
-
-    return (0);
-}
-
-// Check if the file is an ELF file
+/**
+ * Checks if a file is an ELF file.
+ * @param e_ident A pointer to an array containing the ELF magic numbers.
+ *
+ * If the file is not an ELF file, exit with code 98.
+ */
 void check_elf(unsigned char *e_ident)
 {
-    for (int i = 0; i < 4; i++) {
-        if (e_ident[i] != 127 && e_ident[i] != 'E' && e_ident[i] != 'L' && e_ident[i] != 'F') {
-            dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+    for (int i = 0; i < 4; i++)
+    {
+        if (e_ident[i] != 127 &&
+            e_ident[i] != 'E' &&
+            e_ident[i] != 'L' &&
+            e_ident[i] != 'F')
+        {
+            fprintf(stderr, "Error: Not an ELF file\n");
             exit(98);
         }
     }
 }
 
-// Print the ELF magic numbers
+/**
+ * Prints the magic numbers of an ELF header.
+ * @param e_ident A pointer to an array containing the ELF magic numbers.
+ *
+ * Magic numbers are separated by spaces.
+ */
 void print_magic(unsigned char *e_ident)
 {
     printf(" Magic: ");
 
-    for (int i = 0; i < EI_NIDENT; i++) {
+    for (int i = 0; i < EI_NIDENT; i++)
+    {
         printf("%02x", e_ident[i]);
 
         if (i == EI_NIDENT - 1)
@@ -86,12 +60,16 @@ void print_magic(unsigned char *e_ident)
     }
 }
 
-// Print the ELF class
+/**
+ * Prints the class of an ELF header.
+ * @param e_ident A pointer to an array containing the ELF class.
+ */
 void print_class(unsigned char *e_ident)
 {
     printf(" Class: ");
 
-    switch (e_ident[EI_CLASS]) {
+    switch (e_ident[EI_CLASS])
+    {
         case ELFCLASSNONE:
             printf("none\n");
             break;
@@ -100,11 +78,11 @@ void print_class(unsigned char *e_ident)
             break;
         case ELFCLASS64:
             printf("ELF64\n");
-		break;
-	default:
-		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
-	}
-}
+            break;
+        default:
+            printf("<unknown: %x>\n", e_ident[EI_CLASS]);
+    }
+}  
 
 /**
  * print_data - Prints the data of an ELF header.
