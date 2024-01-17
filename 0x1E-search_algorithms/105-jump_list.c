@@ -15,7 +15,6 @@ listint_t *jump_list(listint_t *list, size_t size, int value)
 	listint_t *l, *r;
 	if (list == NULL || size == 0)
 		return (NULL);
-
 	l = list;
 	j = sqrt(size);
 	r = l;
