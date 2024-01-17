@@ -30,7 +30,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 			}
 			break;
 		}
-
 		else if (r->n < value)
 			l = r;
 	}
