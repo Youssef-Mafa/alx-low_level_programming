@@ -2,7 +2,7 @@
 
 /**
  * interpolation_search - searches for a value in a sorted array of integers
- *							using the Interpolation search algorithm
+ *	using the Interpolation search algorithm
  * @array: array of ints
  * @size: size of array
  * @value: int value we are looking for
@@ -11,7 +11,6 @@
 int interpolation_search(int *array, size_t size, int value)
 {
 	size_t low, high, pos;
-
 	if (array == NULL)
 		return (-1);
 	low = 0;
