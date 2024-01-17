@@ -11,10 +11,8 @@
 int advanced_binary_helper(int *array, int l, int r, int value)
 {
 	int i, m;
-
 	if (l > r || l < 0)
 		return (-1);
-
 	printf("Searching in array:");
 	for (i = l; i <= r; i++)
 	{
@@ -48,6 +46,5 @@ int advanced_binary(int *array, size_t size, int value)
 {
 	if (array == NULL || size == 0)
 		return (-1);
-
 	return (advanced_binary_helper(array, 0, size - 1, value));
 }
