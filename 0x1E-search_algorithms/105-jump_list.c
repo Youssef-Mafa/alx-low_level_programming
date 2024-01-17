@@ -3,7 +3,7 @@
 
 /**
  * jump_list - searches for a value in a sorted array of integers
- *				using the Jump search algorithm
+ *	using the Jump search algorithm
  * @list: pointer to the head of the list
  * @size: size of list
  * @value: int value we are looking for
@@ -13,7 +13,6 @@ listint_t *jump_list(listint_t *list, size_t size, int value)
 {
 	size_t j, i;
 	listint_t *l, *r;
-
 	if (list == NULL || size == 0)
 		return (NULL);
 
@@ -22,7 +21,6 @@ listint_t *jump_list(listint_t *list, size_t size, int value)
 	r = l;
 	while (1)
 	{
-
 		for (i = 0; i < j && r; i++)
 		{
 			if (r->next)
@@ -45,6 +43,5 @@ listint_t *jump_list(listint_t *list, size_t size, int value)
 		if (l->next)
 			l = l->next;
 	}
-
 	return (NULL);
 }
