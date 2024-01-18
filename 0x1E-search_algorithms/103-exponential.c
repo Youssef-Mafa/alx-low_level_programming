@@ -11,6 +11,7 @@
 int exponential_search(int *array, size_t size, int value)
 {
 	size_t l, r, index;
+
 	if (array == NULL)
 		return (-1);
 	l = 0;
@@ -34,11 +35,12 @@ int exponential_search(int *array, size_t size, int value)
 			return ((index == (size_t)-1) ? (size_t)-1 : l + index);
 		}
 	}
+
 	return (-1);
 }
 /**
  * binary_search - earches for a value in a sorted array of integers
- *	using the Binary search algorithm
+ *					using the Binary search algorithm
  * @array: array of ints
  * @size: size of array
  * @value: int value we are looking for
@@ -47,6 +49,7 @@ int exponential_search(int *array, size_t size, int value)
 int binary_search(int *array, size_t size, int value)
 {
 	size_t l, r, m, i;
+
 	l = 0;
 	r = size - 1;
 	if (array == NULL)
@@ -70,5 +73,6 @@ int binary_search(int *array, size_t size, int value)
 		else
 			return (m);
 	}
+
 	return (-1);
 }
