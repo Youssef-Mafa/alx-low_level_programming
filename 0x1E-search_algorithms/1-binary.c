@@ -2,7 +2,7 @@
 
 /**
  * binary_search - earches for a value in a sorted array of integers
- *using the Binary search algorithm
+ * using the Binary search algorithm
  * @array: array of ints
  * @size: size of array
  * @value: int value we are looking for
