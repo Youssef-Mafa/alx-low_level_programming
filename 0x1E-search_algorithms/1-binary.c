@@ -1,61 +1,58 @@
-#ifndef SEARCH_ALGOS_H
-#define SEARCH_ALGOS_H
+#include "search_algos.h"
 
-/* LIBRARIES */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-/* STRUCTS */
-/**
- * struct listint_s - singly linked list
- *
- * @n: Integer
- * @index: Index of the node in the list
- * @next: Pointer to the next node
- *
- * Description: singly linked list node structure
- * for Holberton project
- */
-typedef struct listint_s
-{
-	int n;
-	size_t index;
-	struct listint_s *next;
-} listint_t;
+int recurse_helper(int *array, size_t left, size_t right, int value);
 
 /**
- * struct skiplist_s - Singly linked list with an express lane
+ * binary_search - search for value in array of sorted ints
+ * @array: array to search
+ * @size: size of array
+ * @value: value to search
  *
- * @n: Integer
- * @index: Index of the node in the list
- * @next: Pointer to the next node
- * @express: Pointer to the next node in the express lane
- *
- * Description: singly linked list node structure with an express lane
- * for Holberton project
+ * Return: index of found value; or -1 if not found
  */
-typedef struct skiplist_s
+int binary_search(int *array, size_t size, int value)
 {
-	int n;
-	size_t index;
-	struct skiplist_s *next;
-	struct skiplist_s *express;
-} skiplist_t;
+	if (array == NULL)
+		return (-1);
 
-/* PROTOTYPES */
-int linear_search(int *array, size_t size, int value);
-int binary_search(int *array, size_t size, int value);
-int jump_search(int *array, size_t size, int value);
-int interpolation_search(int *array, size_t size, int value);
-int exponential_search(int *array, size_t size, int value);
-int advanced_binary(int *array, size_t size, int value);
-listint_t *jump_list(listint_t *list, size_t size, int value);
-skiplist_t *linear_skip(skiplist_t *list, int value);
+	return (recurse_helper(array, 0, size - 1, value));
+}
 
-/* UTILITIES */
-listint_t *create_list(int *array, size_t size);
-void free_list(listint_t *list);
-void print_list(const listint_t *list);
+/**
+ * recurse_helper - recursive implement of binary search
+ * @array: array to search
+ * @left: leftmost index
+ * @right: rightmost index
+ * @value: value to search
+ *
+ * Return: index of found value; or -1 if not found
+ */
+int recurse_helper(int *array, size_t left, size_t right, int value)
+{
+	size_t i = left, mid;
 
-#endif
+	if (left > right)
+		return (-1);
+
+	/* print search progress */
+	printf("Searching in array: %d", array[i++]);
+	while (i <= right)
+		printf(", %d", array[i++]);
+	printf("\n");
+
+	/* calculate mid */
+	mid = left + ((right - left) / 2);
+
+	/* check if mid is value */
+	if (array[mid] == value)
+		return (mid);
+	else if (array[mid] > value)
+	{
+		if (mid != 0)
+			return (recurse_helper(array, left, mid - 1, value));
+		else
+			return (-1);
+	}
+	else
+		return (recurse_helper(array, mid + 1, right, value));
+}
